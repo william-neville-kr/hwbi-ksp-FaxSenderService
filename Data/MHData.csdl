@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MHDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="MHData" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="GetFaxConfigByID" ReturnType="Collection(MHDataModel.RightFaxSenderConfig)">
+      <Parameter Name="ConfigNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddNewFaxConfig">
+      <Parameter Name="ConfigNo" Mode="In" Type="Int32" />
+      <Parameter Name="ServerURL" Mode="In" Type="String" />
+      <Parameter Name="UserID" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="FaxSenderQueues" EntityType="MHDataModel.FaxSenderQueue" />
+    <EntitySet Name="FaxSenderErrorLogs" EntityType="MHDataModel.FaxSenderErrorLog" />
+  </EntityContainer>
+  <ComplexType Name="RightFaxSenderConfig">
+    <Property Type="Int32" Name="ConfigID" Nullable="false" />
+    <Property Type="String" Name="ServerURL" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="UserID" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <EntityType Name="FaxSenderQueue">
+    <Key>
+      <PropertyRef Name="FaxID" />
+    </Key>
+    <Property Name="FaxID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApplicationID" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="FaxTo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="FaxToName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="HTMLBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AttachmentPath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="SentStatus" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="SentOn" Type="DateTime" Precision="3" />
+    <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SiteID" Type="Int32" />
+    <Property Name="FaxRefID" Type="Int32" />
+    <Property Name="RFJobID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RFUserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ConfigID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="FaxSenderErrorLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FaxID" Type="Int64" Nullable="false" />
+    <Property Name="ErrorMessage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FaxRefID" Type="Int32" />
+    <Property Name="RFJobID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RFUserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

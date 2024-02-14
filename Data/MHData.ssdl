@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FaxServiceDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="FaxSenderErrorLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FaxID" Type="bigint" Nullable="false" />
+    <Property Name="ErrorMessage" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="FaxRefID" Type="int" />
+    <Property Name="RFJobID" Type="nvarchar" MaxLength="50" />
+    <Property Name="RFUserID" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="FaxSenderQueue">
+    <Key>
+      <PropertyRef Name="FaxID" />
+    </Key>
+    <Property Name="FaxID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApplicationID" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="FaxTo" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="FaxToName" Type="nvarchar" MaxLength="250" />
+    <Property Name="HTMLBody" Type="nvarchar(max)" />
+    <Property Name="AttachmentPath" Type="nvarchar" MaxLength="500" />
+    <Property Name="Details" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="250" />
+    <Property Name="SentStatus" Type="nvarchar" MaxLength="250" />
+    <Property Name="SentOn" Type="datetime" />
+    <Property Name="ErrorMessage" Type="nvarchar(max)" />
+    <Property Name="SiteID" Type="int" />
+    <Property Name="FaxRefID" Type="int" />
+    <Property Name="RFJobID" Type="nvarchar" MaxLength="50" />
+    <Property Name="RFUserID" Type="nvarchar" MaxLength="50" />
+    <Property Name="ConfigID" Type="int" />
+  </EntityType>
+  <Function Name="AddNewFaxConfig" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ConfigNo" Type="int" Mode="In" />
+    <Parameter Name="ServerURL" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserID" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetFaxConfigByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ConfigNo" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="FaxServiceDBModelStoreContainer">
+    <EntitySet Name="FaxSenderErrorLog" EntityType="Self.FaxSenderErrorLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FaxSenderQueue" EntityType="Self.FaxSenderQueue" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FaxServiceDBModelStoreContainer" CdmEntityContainer="MHData">
+    <FunctionImportMapping FunctionImportName="GetFaxConfigByID" FunctionName="FaxServiceDBModel.Store.GetFaxConfigByID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MHDataModel.RightFaxSenderConfig">
+          <ScalarProperty Name="ConfigID" ColumnName="ConfigID" />
+          <ScalarProperty Name="ServerURL" ColumnName="ServerURL" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="AddNewFaxConfig" FunctionName="FaxServiceDBModel.Store.AddNewFaxConfig" />
+    <EntitySetMapping Name="FaxSenderQueues">
+      <EntityTypeMapping TypeName="MHDataModel.FaxSenderQueue">
+        <MappingFragment StoreEntitySet="FaxSenderQueue">
+          <ScalarProperty Name="ConfigID" ColumnName="ConfigID" />
+          <ScalarProperty Name="RFUserID" ColumnName="RFUserID" />
+          <ScalarProperty Name="RFJobID" ColumnName="RFJobID" />
+          <ScalarProperty Name="FaxRefID" ColumnName="FaxRefID" />
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+          <ScalarProperty Name="SentOn" ColumnName="SentOn" />
+          <ScalarProperty Name="SentStatus" ColumnName="SentStatus" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="AttachmentPath" ColumnName="AttachmentPath" />
+          <ScalarProperty Name="HTMLBody" ColumnName="HTMLBody" />
+          <ScalarProperty Name="FaxToName" ColumnName="FaxToName" />
+          <ScalarProperty Name="FaxTo" ColumnName="FaxTo" />
+          <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+          <ScalarProperty Name="FaxID" ColumnName="FaxID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FaxSenderErrorLogs">
+      <EntityTypeMapping TypeName="MHDataModel.FaxSenderErrorLog">
+        <MappingFragment StoreEntitySet="FaxSenderErrorLog">
+          <ScalarProperty Name="RFUserID" ColumnName="RFUserID" />
+          <ScalarProperty Name="RFJobID" ColumnName="RFJobID" />
+          <ScalarProperty Name="FaxRefID" ColumnName="FaxRefID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+          <ScalarProperty Name="FaxID" ColumnName="FaxID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
